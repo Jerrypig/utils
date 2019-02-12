@@ -89,22 +89,27 @@ class DateFn {
             return currArr.concat(preArr)
         }
 
-        var formatNext = function(index) {
-            var currNum = 12-index,
+        var formatNext = function (index) {
+            var currNum = 12 - index,
                 nextNum = 0,
                 currArr = [],
-                nextArr = []
-            if (len-currNum > 0) {
-                nextNum = len-currNum   
+                nextArr = [];
+            if (len - currNum > 0) {
+                nextNum = len - currNum;
+                for (var i = 0; i <= currNum; i++) {
+                    currArr.push([yy + '-' + (index + i)]);
+                }
+                for (var i = 1; i < nextNum; i++) {
+                    nextArr.push([(yy + Math.ceil(i / 12)) + '-' + (i % 13 === 0 ? 1 : i % 13)]);
+                }
             }
-            for (var i = 0; i <= currNum; i++) {
-                currArr.push([yy+'-'+(index+i)])
+            else {
+                for (var i = 0; i < len; i++) {
+                    currArr.push([yy + '-' + (index + i)]);
+                }
             }
-            for (var i = 1; i < nextNum; i++) {
-                nextArr.push([(yy+Math.ceil(i/12))+'-'+(i%13 === 0 ? 1:i%13)])
-            }
-            return currArr.concat(nextArr)
-        }
+            return currArr.concat(nextArr);
+        };
         return cutMonth(index)
     }
 
