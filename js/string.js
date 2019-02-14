@@ -116,11 +116,11 @@ class StringFn {
     }
 
     /**
- * 返回文本的Unicode计数
- * @param {string} str 字符串
- * @return {number} charCount 字符串Unicode计数字符个数
- *
- */
+     * 返回文本的Unicode计数
+     * @param {string} str 字符串
+     * @return {number} charCount 字符串Unicode计数字符个数
+     *
+     */
     getUnicodeLength(str) {
         if (!str) {
             return 0;
@@ -183,5 +183,21 @@ class StringFn {
         return str.replace(new RegExp(flag + '(\\w)', 'g'), function (m, $1, idx, str) {
             return $1.toUpperCase();
         });
+    }
+
+    /**
+     * 驼峰转下划线
+     * @param {string} str 驼峰字符串
+     * @return {string} 转换后的字符串
+     */
+    toLowerLine(str) {
+        var temp = str.replace(/[A-Z]/g, function (match) {
+            return '_' + match.toLowerCase();
+        });
+        if (temp.slice(0, 1) === '_') { // 如果首字母是大写，执行replace时会多一个_，这里需要去掉
+            temp = temp.slice(1);
+        }
+
+        return temp;
     }
 }
